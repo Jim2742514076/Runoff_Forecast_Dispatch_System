@@ -27,6 +27,7 @@ from decision_run import Form_decision
 
 
 
+
 class Window(SplitFluentWindow):
     def __init__(self):
         super(SplitFluentWindow,self).__init__()
@@ -34,10 +35,20 @@ class Window(SplitFluentWindow):
         self.initNavigation()
         self.inin_title()
 
+        # splash = SplashScreen()
+        # time.sleep(5)
+        # splash.close()
+
     def inin_title(self):
         # 设置窗体标题
         self.setWindowTitle("径流预报调度系统")
         self.setWindowIcon(QIcon("./icons/System_black.svg"))
+        # 设置窗口大小
+        self.resize(1000, 650)
+        # 居中显示
+        desktop = QApplication.desktop().availableGeometry()
+        w, h = desktop.width(), desktop.height()
+        self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
 
 
 
@@ -59,8 +70,8 @@ class Window(SplitFluentWindow):
 
 
 
-if __name__ == '__main__':
 
+def main():
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
@@ -70,11 +81,10 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
 
+    # #设置开场
     # splash = SplashScreen()
-    # time.sleep(1)
+    # time.sleep(3)
     # splash.close()
-
-
 
     # install translator
     translator = FluentTranslator()
@@ -85,3 +95,6 @@ if __name__ == '__main__':
 
     w.show()
     app.exec_()
+
+if __name__ == '__main__':
+    main()
