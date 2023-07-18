@@ -13,12 +13,13 @@ import time
 
 from ui.decision import Ui_Form
 
-# ui,_ = loadUiType("./ui/predict.ui")
+ui,_ = loadUiType("./ui/decision.ui")
 
-class Form_decision(QWidget,Ui_Form):
+class Form_decision(QMainWindow,ui):
     def __init__(self):
         super(Form_decision, self).__init__()
         self.setupUi(self)
+        self.setObjectName("decision_form")
 
 
 def main():

@@ -15,10 +15,11 @@ from ui.waterinf import Ui_Form
 
 ui,_ = loadUiType("./ui/waterinf.ui")
 
-class Form_waterinf(QWidget,Ui_Form):
+class Form_waterinf(QMainWindow,ui):
     def __init__(self):
         super(Form_waterinf, self).__init__()
         self.setupUi(self)
+        self.setObjectName("waterinf_form")
 
 
 def main():

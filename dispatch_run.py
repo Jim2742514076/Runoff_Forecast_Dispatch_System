@@ -13,12 +13,13 @@ import time
 
 from ui.dispatch import Ui_Form
 
-# ui,_ = loadUiType("./ui/predict.ui")
+ui,_ = loadUiType("./ui/dispatch.ui")
 
-class Form_dispatch(QWidget,Ui_Form):
+class Form_dispatch(QMainWindow,ui):
     def __init__(self):
         super(Form_dispatch, self).__init__()
         self.setupUi(self)
+        self.setObjectName("dispatch_form")
 
 
 def main():

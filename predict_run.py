@@ -13,12 +13,13 @@ import time
 
 from ui.predict import Ui_Form
 
-# ui,_ = loadUiType("./ui/predict.ui")
+ui,_ = loadUiType("./ui/predict.ui")
 
-class Form_predict(QWidget,Ui_Form):
+class Form_predict(QMainWindow,ui):
     def __init__(self):
         super(Form_predict, self).__init__()
         self.setupUi(self)
+        self.setObjectName("predict_form")
 
 
 def main():

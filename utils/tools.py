@@ -20,6 +20,7 @@ class MyFluentIcon(FluentIconBase, Enum):
     Excel = "Excel"
     Predict = "Predict"
     Waterinf = "Waterinf"
+    System = "System"
 
     def path(self, theme=Theme.AUTO):
         return f'./icons/{self.value}_{getIconColor(theme)}.svg'
