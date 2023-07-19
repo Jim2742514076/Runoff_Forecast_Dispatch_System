@@ -16,7 +16,7 @@ from ui.login import Ui_Form
 from run import Window
 from qfluentwidgets import (PushButton, TeachingTip, TeachingTipTailPosition, InfoBarIcon, setTheme, Theme,
                             TeachingTipView, FlyoutViewBase, BodyLabel, PrimaryPushButton, PopupTeachingTip)
-
+import configparser
 
 class Form_login(QWidget,Ui_Form):
     def __init__(self):
@@ -25,11 +25,25 @@ class Form_login(QWidget,Ui_Form):
         self.setObjectName("login")
         self.inin_ui()
         self.handle_button()
+        self.config_load()
 
 
     def handle_button(self):
         self.pushButton.clicked.connect(self.login)
         self.pushButton_2.clicked.connect(self.remember_password)
+
+    def config_load(self):
+        # 加载配置文件
+        self.config = configparser.ConfigParser()
+        self.config.read("./utils/config.ini")
+
+        # 如果配置文件中有保存的用户名和密码，自动填充
+        if self.config.has_option("Login", "username") and self.config.has_option("Login", "password"):
+            username = self.config.get("Login", "username")
+            password = self.config.get("Login", "password")
+            self.lineEdit_3.setText(username)
+            self.lineEdit_4.setText(password)
+            self.checkBox.setChecked(True)
 
     def remember_password(self):
         if self.lineEdit_3.text():
@@ -167,6 +181,13 @@ class Form_login(QWidget,Ui_Form):
     def login(self):
         username = self.lineEdit_3.text()
         password = self.lineEdit_4.text()
+
+        remember_password = self.checkBox.isChecked()
+        # 保存用户名和密码到配置文件
+        if remember_password:
+            self.config["Login"] = {"username": username, "password": password}
+            with open("./utils/config.ini", "w") as configfile:
+                self.config.write(configfile)
 
         conn,cursor = get_conn()
         sql = "SELECT username,password FROM users WHERE username=%s"
