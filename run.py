@@ -22,11 +22,7 @@ from waterinf_run import Form_waterinf
 from predict_run import Form_predict
 from dispatch_run import Form_dispatch
 from decision_run import Form_decision
-
-
-
-
-
+from main import Form_main
 
 
 class Window(SplitFluentWindow):
@@ -63,7 +59,7 @@ class Window(SplitFluentWindow):
         )
         self.navigationInterface.addWidget(
             routeKey='settingInterface',
-            widget=NavigationAvatarWidget('设置', "./icons/theme.svg"),
+            widget=NavigationAvatarWidget('主题切换', "./icons/theme.svg"),
             onClick=self.change_theme,
             position=NavigationItemPosition.BOTTOM,
         )
@@ -97,9 +93,11 @@ class Window(SplitFluentWindow):
         self.predict = Form_predict()
         self.dispatch = Form_dispatch()
         self.decision = Form_decision()
+        self.main = Form_main()
 
 
     def initNavigation(self):
+        self.addSubInterface(self.main,FIF.HOME,"主页")
         self.addSubInterface(self.waterinf, MyFluentIcon.Waterinf, '水情分析')
         self.addSubInterface(self.predict, MyFluentIcon.Predict,"来水预报")
         self.addSubInterface(self.dispatch,MyFluentIcon.Dispatch,"水量调度")

@@ -4,32 +4,40 @@
 # @File : main.py
 # @Softwore : PyCharm
 
+from PyQt5.QtGui import *
+from PyQt5.uic import loadUiType
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 import sys
+import time
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout
+from ui.dispatch import Ui_Form
 
-from qfluentwidgets import (PushButton, TeachingTip, TeachingTipTailPosition, InfoBarIcon, setTheme, Theme,
-                            TeachingTipView, FlyoutViewBase, BodyLabel, PrimaryPushButton, PopupTeachingTip)
+ui,_ = loadUiType("./ui/html_main.ui")
 
+class Form_main(QWidget,ui):
+    def __init__(self):
+        super(Form_main, self).__init__()
+        self.setupUi(self)
+        self.setObjectName("main_form")
 
-def showTopTip():
-    position = TeachingTipTailPosition.BOTTOM
-    view = TeachingTipView(
-        icon=None,
-        title='Lesson 5',
-        content="最短的捷径就是绕远路，绕远路才是我的最短捷径。",
-        # image='resource/Gyro.jpg',
-        # image='resource/boqi.gif',
-        isClosable=True,
-        tailPosition=position,
-    )
-
-    # add widget to view
-    button = PushButton('Action')
-    button.setFixedWidth(120)
-    view.addWidget(button, align=Qt.AlignRight)
+        self.web =QWebEngineView()
+        if self.verticalLayout_2.count() > 0:
+            self.verticalLayout_2.removeItem(self.verticalLayout_2.itemAt(0))
+        self.web.load(QUrl("file:///" + "./html/主页/index.html"))
+        self.verticalLayout_2.addWidget(self.web)
 
 
 
-showTopTip()
+
+def main():
+    app = QApplication(sys.argv)
+    mainwindow = Form_main()
+    mainwindow.setWindowTitle("主页")
+    mainwindow.setWindowIcon(QIcon("./icons/Dispatch_white.svg"))
+    mainwindow.show()
+    sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()

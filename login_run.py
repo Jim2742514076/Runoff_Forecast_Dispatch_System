@@ -45,6 +45,7 @@ class Form_login(QWidget,Ui_Form):
             self.lineEdit_4.setText(password)
             self.checkBox.setChecked(True)
 
+    #记住密码
     def remember_password(self):
         if self.lineEdit_3.text():
             username = self.lineEdit_3.text()
@@ -57,8 +58,6 @@ class Form_login(QWidget,Ui_Form):
                 self.showTopTip_success()
             else:
                 self.showTopTip_remember_error()
-
-
 
 
     def showTopTip_remember_error(self):
