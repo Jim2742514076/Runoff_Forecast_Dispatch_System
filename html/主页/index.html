@@ -1,0 +1,571 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>index</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<link rel="stylesheet" href="css/comon0.css">
+</head>
+<body>
+<!--<div class="loading">-->
+<!--  <div class="loadbox"> <img src="images/loading.gif"> 页面加载中... </div>-->
+<!--</div>-->
+	<div class="canvas" >
+	<canvas width="100%" height="100%"></canvas>
+	</div>
+	
+<div class="head">
+  <h1><a>洪泽湖、骆马湖水情分析</a></h1>
+</div>
+<div class="mainbox">
+	<div class="topnav">
+	<ul  class="clearfix">
+		<li>	<div class="boxall">
+        <div class="tit01">两湖多年平均流量</div>
+		 <div class="boxnav nav01" style="display: flex; align-items: center;">
+
+			 <div class="yqlist">
+            <ul class="clearfix">
+				 			   <li><div class="yq">1810<span>洪泽湖汛期</span></div></li>
+                              <li><div class="yq">508<span>洪泽湖非汛期</span></div></li>
+                              <li><div class="yq">834<span>洪泽湖全年</span></div></li>
+                              <li><div class="yq">367<span>骆马湖汛期</span></div></li>
+                              <li><div class="yq">66<span>骆马湖非汛期</span></div></li>
+                              <li><div class="yq">141<span>骆马湖全年</span></div></li>
+                            </ul>
+          </div>
+			 
+				 </div>
+        <div class="boxfoot"></div>
+      </div></li>
+		<li>
+		<div class="boxall" style="padding: 0;">
+      
+        <div class="boxnav" style="height: 100%; display: flex; align-items: center;">
+		  	<ul class="zjyl">
+				<li><i>193<em>亿m&sup3</em></i><span>洪泽湖最大月径流量</span></li>
+				<li><i>68<em>亿m&sup3</em></i><span>骆马湖最大月径流量</span></li>
+				<li><i>1963-07<em></em></i><span>洪泽湖最大来水月份</span></li>
+				<li><i>2007-7<em></em></i><span>骆马湖最大来水月份</span></li>
+			</ul>
+			
+			
+		  </div>
+        <div class="boxfoot"></div>
+      </div>
+		</li>
+	<li>
+		<div class="boxall" style="padding: 0;">
+      <div class="tit01">两湖来水年均流量变化规律</div>
+        <div class="boxnav nav03"  id="echart3">
+		
+			
+			
+		  </div>
+        <div class="boxfoot"></div>
+      </div>
+		</li>
+		</ul>
+	</div>
+
+	
+	<div class="" style="height:calc(50% - .25rem)">
+	<ul class="ulheight">
+		<li><div class="boxall" >
+        <div class="tit01">两湖来水丰枯遭遇规律</div>
+			 <div class="boxnav nav03" id="echart1">
+				 
+				 
+				 
+				 
+			
+			</div>
+        <div class="boxfoot"></div>
+      </div>
+		</li>
+		<li><div class="boxall">
+        <div class="tit01">某年两湖供水片区需水量分布</div>
+			 <div class="boxnav nav03" id="echart2">
+				 
+				 
+				 
+				 
+			
+			</div>
+        <div class="boxfoot"></div>
+      </div>
+		</li>
+		<li><div class="boxall">
+        <div class="tit01">两湖径流突变年份</div>
+			 <div class="boxnav nav03">
+				 
+				 	 <div class="listhead ">
+				  <span>突变对象</span>
+					  <span>突变年份</span>
+					  <span>突变流量</span>
+
+				 </div>
+				 <div class="listnav  scrollDiv">
+				 <ul>
+					 <li> 
+						 <span>洪泽湖</span>
+						 <span>1988</span>
+						 <span>345.61</span>
+
+					 </li>
+					 <li> 
+						 <span>骆马湖</span>
+						 <span>1966</span>
+						 <span>58.43</span>
+
+					 </li>
+					 <li> 
+						 <span>洪泽湖</span>
+						 <span>1990</span>
+						 <span>765.91</span>
+
+					 </li>
+					 <li> 
+						 <span>骆马湖</span>
+						 <span>2008</span>
+						 <span>219.92</span>
+
+					 </li>
+					 <li> 
+						 <span>洪泽湖</span>
+						 <span>1992</span>
+						 <span>312.74</span>
+
+					 </li>
+					 <li> 
+						 <span>骆马湖</span>
+						 <span>2010</span>
+						 <span>91.83</span>
+
+					 </li>
+					 <li> 
+						 <span>洪泽湖</span>
+						 <span>1996</span>
+						 <span>1114.08</span>
+
+					 </li>
+					 <li> 
+						 <span>骆马湖</span>
+						 <span>2012</span>
+						 <span>105.59</span>
+
+					 </li>
+					 <li> 
+						 <span>洪泽湖</span>
+						 <span>1997</span>
+						 <span>388.75</span>
+
+					 </li>
+					 <li> 
+						 <span>洪泽湖</span>
+						 <span>1999</span>
+						 <span>212.16</span>
+
+					 </li>
+					 <li> 
+						 <span>洪泽湖</span>
+						 <span>2012</span>
+						 <span>365.41</span>
+
+					 </li>
+					
+					 </ul>
+				 </div>
+				 
+				 
+				 
+			
+			</div>
+        <div class="boxfoot"></div>
+      </div>
+		</li>
+		</ul>
+	</div>
+	
+	
+	
+	
+  
+</div>
+
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('first'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '线图'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['Email']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: 'Email',
+                    type: 'line',
+                    stack: 'Total',
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                }
+            ]
+        };
+        function line_com(var0, var1, var2, var3, var4, var5, var6) {
+            myChart.showLoading();
+          if (option && typeof option === "object") {
+              option["series"][0]["data"][0] = var0;
+              option["series"][0]["data"][1] = var1;
+              option["series"][0]["data"][2] = var2;
+              option["series"][0]["data"][3] = var3;
+              option["series"][0]["data"][4] = var4;
+              option["series"][0]["data"][5] = var5;
+              option["series"][0]["data"][6] = var6;
+              myChart.setOption(option, true);
+              myChart.hideLoading();
+              return null
+          };
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        line_com(120, 132, 101, 134, 90, 230, 210)
+    </script>
+
+<script language="JavaScript" src="js/js.js"></script> 
+<script type="text/javascript" src="js/jquery.countup.min.js"></script> 
+<script type="text/javascript" src="js/jquery.waypoints.min.js"></script> 
+	<script src="js/jquery.liMarquee.js"></script> 
+<script type="text/javascript">
+$('.counter').countUp();
+
+$(function(){
+	$('.scrollDiv').liMarquee({
+		direction: 'up',//身上滚动
+		runshort: false,//内容不足时不滚动
+		scrollamount: 20//速度
+	});
+});
+
+</script>
+
+
+<script>
+
+$(function(){
+
+  var canvas = document.querySelector('canvas'),
+
+      ctx = canvas.getContext('2d')
+
+  canvas.width = window.innerWidth;
+
+  canvas.height = window.innerHeight;
+
+  ctx.lineWidth = .3;
+
+  ctx.strokeStyle = (new Color(150)).style;
+
+
+
+  var mousePosition = {
+
+    x: 30 * canvas.width / 100,
+
+    y: 30 * canvas.height / 100
+
+  };
+
+
+
+  var dots = {
+
+    nb: 250,
+
+    distance: 50,
+
+    d_radius: 400,
+
+    array: []
+
+  };
+
+
+
+  function colorValue(min) {
+
+    return Math.floor(Math.random() * 255 + min);
+
+  }
+
+  
+
+  function createColorStyle(r,g,b) {
+
+    return 'rgba(' + r + ',' + g + ',' + b + ', 0.8)';
+
+  }
+
+  
+
+  function mixComponents(comp1, weight1, comp2, weight2) {
+
+    return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
+
+  }
+
+  
+
+  function averageColorStyles(dot1, dot2) {
+
+    var color1 = dot1.color,
+
+        color2 = dot2.color;
+
+    
+
+    var r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
+
+        g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
+
+        b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);
+
+    return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
+
+  }
+
+  
+
+  function Color(min) {
+
+    min = min || 0;
+
+    this.r = colorValue(min);
+
+    this.g = colorValue(min);
+
+    this.b = colorValue(min);
+
+    this.style = createColorStyle(this.r, this.g, this.b);
+
+  }
+
+
+
+  function Dot(){
+
+    this.x = Math.random() * canvas.width;
+
+    this.y = Math.random() * canvas.height;
+
+
+
+    this.vx = -.5 + Math.random();
+
+    this.vy = -.5 + Math.random();
+
+
+
+    this.radius = Math.random() * 2;
+
+
+
+    this.color = new Color();
+
+    console.log(this);
+
+  }
+
+
+
+  Dot.prototype = {
+
+    draw: function(){
+
+      ctx.beginPath();
+
+      ctx.fillStyle = this.color.style;
+
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+
+      ctx.fill();
+
+    }
+
+  };
+
+
+
+  function createDots(){
+
+    for(i = 0; i < dots.nb; i++){
+
+      dots.array.push(new Dot());
+
+    }
+
+  }
+
+
+
+  function moveDots() {
+
+    for(i = 0; i < dots.nb; i++){
+
+
+
+      var dot = dots.array[i];
+
+
+
+      if(dot.y < 0 || dot.y > canvas.height){
+
+        dot.vx = dot.vx;
+
+        dot.vy = - dot.vy;
+
+      }
+
+      else if(dot.x < 0 || dot.x > canvas.width){
+
+        dot.vx = - dot.vx;
+
+        dot.vy = dot.vy;
+
+      }
+
+      dot.x += dot.vx;
+
+      dot.y += dot.vy;
+
+    }
+
+  }
+
+
+
+  function connectDots() {
+
+    for(i = 0; i < dots.nb; i++){
+
+      for(j = 0; j < dots.nb; j++){
+
+        i_dot = dots.array[i];
+
+        j_dot = dots.array[j];
+
+
+
+        if((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance && (i_dot.x - j_dot.x) > - dots.distance && (i_dot.y - j_dot.y) > - dots.distance){
+
+          if((i_dot.x - mousePosition.x) < dots.d_radius && (i_dot.y - mousePosition.y) < dots.d_radius && (i_dot.x - mousePosition.x) > - dots.d_radius && (i_dot.y - mousePosition.y) > - dots.d_radius){
+
+            ctx.beginPath();
+
+            ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
+
+            ctx.moveTo(i_dot.x, i_dot.y);
+
+            ctx.lineTo(j_dot.x, j_dot.y);
+
+            ctx.stroke();
+
+            ctx.closePath();
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+
+  function drawDots() {
+
+    for(i = 0; i < dots.nb; i++){
+
+      var dot = dots.array[i];
+
+      dot.draw();
+
+    }
+
+  }
+
+
+
+  function animateDots() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    moveDots();
+
+    connectDots();
+
+    drawDots();
+
+
+
+    requestAnimationFrame(animateDots);	
+
+  }
+
+
+
+  $('canvas').on('mousemove', function(e){
+
+    mousePosition.x = e.pageX;
+
+    mousePosition.y = e.pageY;
+
+  });
+
+
+
+  $('canvas').on('mouseleave', function(e){
+
+    mousePosition.x = canvas.width / 2;
+
+    mousePosition.y = canvas.height / 2;
+
+  });
+
+
+
+  createDots();
+
+  requestAnimationFrame(animateDots);	
+
+});
+
+</script>
+</body>
+</html>
