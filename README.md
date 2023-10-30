@@ -5,13 +5,21 @@
 ## 系统架构
 
 ## 界面展示
+![mainpage.png](mainpage.png)
 ### 登录界面
-
+技术栈：mysql + pyqt
+实现思路：通过在数据库中注入用户名和密码，进行匹配
+加密方式：md5
+密码找回：首次登录会在本地生成一个ini文件，记录用户名和密码，通过点击忘记密码会自行导入密码
+![loginpage.png](loginpage.png)
 ### 主页
-
+技术栈：html + js + echarts
 ### 水情分析
 
+
+
 ### 来水预测
+![predictpage.png](predictpage.png)
 
 ### 水量调度
 
