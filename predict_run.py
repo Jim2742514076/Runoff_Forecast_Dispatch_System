@@ -11,7 +11,7 @@ from PyQt5.QtCore import *
 import sys
 import time
 
-from ui.predict import Ui_Form
+from ui.predict import Ui_MainWindow
 
 ui,_ = loadUiType("./ui/predict.ui")
 

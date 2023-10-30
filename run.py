@@ -113,7 +113,7 @@ def main():
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
 
-    # setTheme(Theme.DARK)
+    setTheme(Theme.LIGHT)
 
     app = QApplication(sys.argv)
 
