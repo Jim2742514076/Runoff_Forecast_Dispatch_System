@@ -21,6 +21,18 @@ class Form_predict(QMainWindow,ui):
         self.setupUi(self)
         self.setObjectName("predict_form")
 
+        self.initialize_combox()
+
+        # 初始化下拉框
+        def initialize_combox(self):
+            # 从列表中添加下拉选项
+            self.ComboBox.addItems([str(_) for _ in range(1, 11)])
+            # 设置显示项目
+            self.ComboBox.setCurrentIndex(4)
+
+
+
+
 
 def main():
     app = QApplication(sys.argv)

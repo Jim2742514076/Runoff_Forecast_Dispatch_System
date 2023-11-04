@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1628</width>
-    <height>1022</height>
+    <width>1647</width>
+    <height>1090</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,214 +15,184 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="1" column="0">
-     <widget class="CardWidget" name="CardWidget">
+    <item row="2" column="3" rowspan="2" colspan="2">
+     <widget class="CardWidget" name="CardWidget_4">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>1000</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_16">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>模型训练误差</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PixmapLabel" name="PixmapLabel"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="CardWidget" name="CardWidget_7">
       <property name="maximumSize">
        <size>
         <width>250</width>
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="4" column="1">
-        <widget class="LineEdit" name="LineEdit_2"/>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="1" column="1">
+        <widget class="LineEdit" name="LineEdit_8"/>
        </item>
-       <item row="2" column="1">
-        <widget class="LineEdit" name="LineEdit"/>
+       <item row="0" column="1">
+        <widget class="LineEdit" name="LineEdit_7"/>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>训练集比例：</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>预报因子：</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="PushButton" name="PushButton_5">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
          </property>
          <property name="text">
-          <string>数据导入</string>
+          <string>批次大小：</string>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="ComboBox" name="ComboBox"/>
+        <widget class="LineEdit" name="LineEdit_10"/>
        </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QLabel" name="label">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
+       <item row="2" column="1">
+        <widget class="LineEdit" name="LineEdit_9"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_12">
          <property name="font">
           <font>
-           <pointsize>15</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
+           <family>微软雅黑</family>
           </font>
          </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(85, 170, 255);</string>
+         <property name="text">
+          <string>神经元个数：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
          </property>
          <property name="text">
-          <string>初始化面板</string>
+          <string>隐藏层层数：</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>时间步长：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="LineEdit" name="LineEdit_11"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_19">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>学习率：</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="label_15">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
          <property name="text">
-          <string>预报模型：</string>
+          <string>迭代次数：</string>
          </property>
         </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="LineEdit" name="LineEdit_17"/>
        </item>
       </layout>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="CardWidget" name="CardWidget_2">
+    <item row="0" column="0" colspan="5">
+     <widget class="CaptionLabel" name="CaptionLabel">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>500</height>
+        <height>60</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="TableWidget" name="TableWidget"/>
-       </item>
-      </layout>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(85, 170, 255);</string>
+      </property>
+      <property name="text">
+       <string>预报模块</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="CardWidget" name="CardWidget_5">
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_10">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>15</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(85, 170, 255);</string>
-         </property>
-         <property name="text">
-          <string>控制面板</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="PushButton" name="PushButton_2">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>数据预处理</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="PushButton" name="PushButton">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>模型训练</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="PushButton" name="PushButton_3">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>模型检验</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="PushButton" name="PushButton_4">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>模型预报</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="PushButton" name="PushButton_6">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>结果导出</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="3" column="0">
      <widget class="CardWidget" name="CardWidget_3">
       <property name="maximumSize">
        <size>
@@ -331,50 +301,336 @@ background-color: rgb(85, 170, 255);</string>
       </layout>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2">
-     <widget class="CaptionLabel" name="CaptionLabel">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>60</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>60</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(85, 170, 255);</string>
-      </property>
-      <property name="text">
-       <string>预报模块</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
+    <item row="4" column="3" colspan="2">
+     <widget class="CardWidget" name="CardWidget_9">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QLabel" name="label_18">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>测试集</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PixmapLabel" name="PixmapLabel_4"/>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="2" column="1" rowspan="2">
-     <widget class="CardWidget" name="CardWidget_4">
+    <item row="1" column="0">
+     <widget class="CardWidget" name="CardWidget">
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="4" column="1">
+        <widget class="LineEdit" name="LineEdit_2"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="LineEdit" name="LineEdit"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>训练集比例：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>预报因子：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="PushButton" name="PushButton_5">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>数据导入</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="ComboBox" name="ComboBox"/>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(85, 170, 255);</string>
+         </property>
+         <property name="text">
+          <string>初始化面板</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>预报模型：</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="4">
+     <widget class="CardWidget" name="CardWidget_2">
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>1000</height>
+        <height>500</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="PixmapLabel" name="PixmapLabel"/>
+        <widget class="TableWidget" name="TableWidget"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="CardWidget" name="CardWidget_6">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_11">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>模型概要</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="BodyLabel" name="BodyLabel">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="CardWidget" name="CardWidget_5">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_10">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(85, 170, 255);</string>
+         </property>
+         <property name="text">
+          <string>控制面板</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="PushButton_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>数据预处理</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="PushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>模型训练</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="PushButton_3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>模型检验</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="PushButton_4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>模型预报</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="PushButton_6">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>结果导出</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="1" colspan="2">
+     <widget class="CardWidget" name="CardWidget_8">
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QLabel" name="label_17">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>训练集</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PixmapLabel" name="PixmapLabel_3"/>
        </item>
       </layout>
      </widget>
@@ -386,7 +642,7 @@ background-color: rgb(85, 170, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1628</width>
+     <width>1647</width>
      <height>26</height>
     </rect>
    </property>
@@ -417,6 +673,11 @@ background-color: rgb(85, 170, 255);</string>
   </customwidget>
   <customwidget>
    <class>CaptionLabel</class>
+   <extends>QLabel</extends>
+   <header>qfluentwidgets</header>
+  </customwidget>
+  <customwidget>
+   <class>BodyLabel</class>
    <extends>QLabel</extends>
    <header>qfluentwidgets</header>
   </customwidget>
