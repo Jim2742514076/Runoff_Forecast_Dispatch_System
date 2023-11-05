@@ -34,9 +34,9 @@ class Config():
     data_path = ''  # 文件路径
     timestep = 20  # 时间步长，就是利用多少时间窗口
     batch_size = 32  # 批次大小
-    feature_size = 8  # 每个步长对应的特征数量，这里只使用1维，每天的风速
+    feature_size = 8  # 每个步长对应的特征数量，这里只使用1维
     hidden_size = 256  # 隐层大小
-    output_size = 2  # 由于是多输出任务，最终输出层大小为2，预测未来2天风速
+    output_size = 2  # 由于是多输出任务，最终输出层大小为2
     num_layers = 2  # lstm的层数
     epochs = 10 # 迭代轮数
     best_loss = 0 # 记录损失
