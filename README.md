@@ -6,13 +6,14 @@
 ## 系统架构
 
 ## 界面展示
-![mainpage.png](mainpage.png)
+
+![mainpage.png](./imgs/mainpage.png)
 ### 登录界面
 技术栈：mysql + pyqt
 实现思路：通过在数据库中注入用户名和密码，进行匹配
 加密方式：md5
 密码找回：首次登录会在本地生成一个ini文件，记录用户名和密码，通过点击忘记密码会自行导入密码
-![loginpage.png](loginpage.png)
+![loginpage.png](./imgs/loginpage.png)
 ### 主页
 技术栈：html + js + echarts
 ### 水情分析
@@ -20,7 +21,7 @@
 
 
 ### 来水预测
-![predict.png](predict.png)
+![predict.png](./imgs/predict.png)
 技术栈：pyqt + pytorch + matplotlib
 算法思路：中长期径流预测形成规律具有极强的物理背景，本系统采用**递归单步预测**对齐进行算法构建，（由于特征构建部分涉及生产资料，
 故本系统不对特征构建进行开源，有兴趣请翻阅论文自行编写）。
