@@ -18,10 +18,12 @@ import torch
 import torch.nn as nn
 import tushare as ts
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from qfluentwidgets import Dialog,IndeterminateProgressRing
+from sklearn.metrics import mean_squared_error
+from qfluentwidgets import Dialog,IndeterminateProgressRing,IndeterminateProgressBar
 from torch.utils.data import TensorDataset
 from tqdm import tqdm
-
+from utils.tools import Progress_inf
+from torchsummary import summary
 from ui.predict import Ui_MainWindow
 
 ui,_ = loadUiType("./ui/predict.ui")
@@ -29,9 +31,9 @@ ui,_ = loadUiType("./ui/predict.ui")
 #初始化配置
 class Config():
     # data_path = 'test.csv'
-    timestep = 20  # 时间步长，就是利用多少时间窗口
+    timestep = 1  # 时间步长，就是利用多少时间窗口
     batch_size = 32  # 批次大小
-    feature_size = 8  # 每个步长对应的特征数量
+    feature_size = 5  # 每个步长对应的特征数量
     hidden_size = 256  # 隐层大小
     # output_size = 2  # 由于是多输出任务，最终输出层大小为2
     output_size = 1
@@ -74,18 +76,7 @@ class LSTM(nn.Module):
         # 我们只需要返回最后一个时间片的数据即可
         return output[:, -1, :]
 
-class Demo(QDialog):
 
-    def __init__(self):
-        super().__init__()
-        # setTheme(Theme.DARK)
-        # self.setStyleSheet('Demo{background: rgb(32, 32, 32)}')
-        self.setWindowTitle("模型训练中")
-        self.setWindowIcon(QIcon("./icons/UEG.png"))
-        self.vBoxLayout = QVBoxLayout(self)
-        self.spinner = IndeterminateProgressRing(self)
-        self.vBoxLayout.addWidget(self.spinner, 0, Qt.AlignHCenter)
-        self.resize(400, 400)
 
 class Form_predict(QMainWindow,ui):
     def __init__(self):
@@ -95,6 +86,14 @@ class Form_predict(QMainWindow,ui):
         #数据源
         self.data = 0
         self.data_deal = 0
+        #模型
+        self.model = 0
+
+        #训练集、测试集输出值
+        self.y_true_train = 0
+        self.y_true_test = 0
+        self.y_pre_train = 0
+        self.y_pre_test = 0
 
         self.initialize_lineedit()
         self.initialize_combox()
@@ -143,20 +142,17 @@ class Form_predict(QMainWindow,ui):
         self.PushButton_5.clicked.connect(self.add_data)
         self.PushButton_2.clicked.connect(self.deal_data)
         self.PushButton.clicked.connect(self.model_train)
-        # self.PushButton_3.clicked.connect(self.test)
+        self.PushButton_4.clicked.connect(self.draw_img)
+        self.PushButton_3.clicked.connect(self.test)
 
-    # def test(self):
-    #
-    #     # 创建一个 QWidget 作为 QProgressDialog 的父部件
-    #     widget = QWidget()
-    #     # 创建一个 QVBoxLayout 作为布局
-    #     layout = QVBoxLayout(widget)
-    #     progress_dialog = QProgressDialog(widget)
-    #     progress_dialog.setWindowModality(Qt.ApplicationModal)
-    #     animation_label = IndeterminateProgressRing(self)
-    #     # 将 QLabel 添加到对话框的布局中
-    #     layout.addWidget(animation_label)
-    #     progress_dialog.show()
+
+
+    def test(self):
+        self.demo = Progress_inf()
+        self.demo.show()
+        self.BodyLabel.setText("test")
+
+
 
     #导入数据
     def add_data(self):
@@ -194,7 +190,16 @@ class Form_predict(QMainWindow,ui):
             pass
         else:
             pass
-
+    # 操作成功
+    def show_success(self,name=""):
+        title = '操作成功'
+        content = f"""{name}"""
+        w = Dialog(title, content, self)
+        w.setTitleBarVisible(False)
+        if w.exec():
+            pass
+        else:
+            pass
     # 警示对话框信息
     def warning_dialog(self, name=""):
         title = '操作失败'
@@ -208,13 +213,17 @@ class Form_predict(QMainWindow,ui):
 
     #数据预处理
     def deal_data(self):
-        scaler_model = MinMaxScaler()
-        self.data_deal = scaler_model.fit_transform(np.array(self.data))
-        # print(type(self.data_deal))
-        self.showDialog(name="数据预处理")
+        if isinstance(self.data, pd.DataFrame):
+            scaler_model = MinMaxScaler()
+            self.data_deal = scaler_model.fit_transform(np.array(self.data))
+            # print(type(self.data_deal))
+            self.showDialog(name="数据预处理")
+        else:
+            self.warning_dialog(name="数据未导入")
 
     #模型训练
     def model_train(self):
+        self.statusBar().showMessage("模型训练中...")
         #实例化配置类
         config = Config()
         def split_data(data, timestep, feature_size, output_size):
@@ -224,7 +233,7 @@ class Form_predict(QMainWindow,ui):
             # 将整个窗口的数据保存到X中，将未来一天保存到Y中
             for index in range(len(data) - timestep - 1):
                 dataX.append(data[index: index + timestep])
-                dataY.append(data[index + timestep: index + timestep + output_size][:, 0].tolist())
+                dataY.append(data[index + timestep: index + timestep + output_size][:, -1].tolist())
 
             dataX = np.array(dataX)
             dataY = np.array(dataY)
@@ -272,6 +281,10 @@ class Form_predict(QMainWindow,ui):
             loss_function = nn.MSELoss()  # 定义损失函数
             optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)  # 定义优化器
 
+            #弹窗进度条无法设置，采用信息提示栏显示
+            # progressinf = Progress_inf()
+            # progressinf.show()
+
             # 8.模型训练
             for epoch in range(config.epochs):
                 model.train()
@@ -303,11 +316,67 @@ class Form_predict(QMainWindow,ui):
                     config.best_loss = test_loss
                     torch.save(model.state_dict(), config.save_path)
             print('Finished Training')
+            # self.progressinf.close()
+            self.statusBar().showMessage(" ")
+            self.BodyLabel.setText(str(model))
+
+            self.model = model
+            scaler = MinMaxScaler()
+            scaler.fit_transform(np.array(self.data.iloc[:,-1]).reshape(-1, 1))
+            self.y_pre_train = scaler.inverse_transform((model(x_train_tensor).detach().numpy()[:, 0]).reshape(-1, 1))
+            self.y_true_train = scaler.inverse_transform(y_train_tensor.detach().numpy().reshape(-1, 1)[:])
+            self.y_pre_test = scaler.inverse_transform(model(x_test_tensor).detach().numpy()[: , 0].reshape(-1, 1))
+            self.y_true_test = scaler.inverse_transform(y_test_tensor.detach().numpy().reshape(-1, 1)[:])
+            self.show_success(name="模型训练结束")
         else:
             self.warning_dialog(name="数据未进行预处理")
 
+    #绘制迭代误差图
+
+    #输出检验值
+    def model_valid(self):
+        # 计算均方误差
+        mse = mean_squared_error(self.y_true_test, self.y_pre_test)
+
+    #绘制图像
+    def draw_img(self):
+        plt.figure(figsize=(12, 8))
+        plt.plot(self.y_pre_train,"b",label="pre")
+        plt.plot(self.y_true_train,"r",label="true")
+        plt.legend()
+        # 获取当前图表对象
+        fig = plt.gcf()
+        # 设置图片尺寸为 7x5 英寸
+        fig.set_size_inches(6, 4)
+        fig.savefig("./imgs/train.png")
+        time.sleep(0.5)
+        # 设置图片
+        self.PixmapLabel_3.setPixmap(QPixmap("./imgs/train.png"))
+        self.PixmapLabel_3.setScaledContents(True)  # 图片自适应窗口大小
+        self.PixmapLabel_3.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.PixmapLabel_3.setAlignment(Qt.AlignCenter)  # 图片居中显示
+
+        plt.figure(figsize=(12, 8))
+        plt.plot(self.y_pre_test, "b", label="pre")
+        plt.plot(self.y_true_test, "r", label="true")
+        plt.legend()
+        # 获取当前图表对象
+        fig = plt.gcf()
+        # 设置图片尺寸为 7x5 英寸
+        fig.set_size_inches(6, 4)
+        fig.savefig("./imgs/test.png")
+        time.sleep(0.5)
+        # 设置图片
+        self.PixmapLabel_4.setPixmap(QPixmap("./imgs/test.png"))
+        self.PixmapLabel_4.setScaledContents(True)  # 图片自适应窗口大小
+        self.PixmapLabel_4.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.PixmapLabel_4.setAlignment(Qt.AlignCenter)  # 图片居中显示
 
 def main():
+    QApplication.setHighDpiScaleFactorRoundingPolicy(
+        Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
+    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
     app = QApplication(sys.argv)
     mainwindow = Form_predict()
     mainwindow.setWindowTitle("来水预测")

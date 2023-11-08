@@ -14,8 +14,9 @@
 加密方式：md5
 密码找回：首次登录会在本地生成一个ini文件，记录用户名和密码，通过点击忘记密码会自行导入密码
 ![loginpage.png](./imgs/loginpage.png)
-### 主页
+### 主页展示
 技术栈：html + js + echarts
+![img.png](./imgs/img.png)
 ### 水情分析
 
 

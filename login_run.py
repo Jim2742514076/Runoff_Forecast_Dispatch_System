@@ -204,8 +204,6 @@ class Form_login(QWidget,Ui_Form):
             self.showTopTip()
             close_conn(conn, cursor)
 
-
-
     def open_main_run(self):
         window = Window()
         window.show()

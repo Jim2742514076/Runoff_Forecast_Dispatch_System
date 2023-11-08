@@ -6,10 +6,11 @@
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QVBoxLayout,QSplashScreen,QLabel
+from PyQt5.QtWidgets import QVBoxLayout,QSplashScreen,QLabel,QWidget
 from qfluentwidgets import getIconColor, Theme, FluentIconBase
 from enum import Enum
 
+from qfluentwidgets import Dialog,IndeterminateProgressRing,IndeterminateProgressBar
 #自定义图标
 class MyFluentIcon(FluentIconBase, Enum):
     """ Custom icons """
@@ -49,3 +50,11 @@ class SplashScreen(QSplashScreen):
         self.setLayout(layout)
         self.show()
 
+#不确定进度条
+class Progress_inf(QWidget):
+    def __init__(self,parent=None):
+        super().__init__(parent=parent)
+        self.vBoxLayout = QVBoxLayout(self)
+        self.inProgressBar = IndeterminateProgressRing(self)
+        self.vBoxLayout.addWidget(self.inProgressBar,0, Qt.AlignHCenter)
+        self.resize(400, 400)
