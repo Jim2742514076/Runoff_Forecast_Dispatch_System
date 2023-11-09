@@ -18,7 +18,7 @@ import torch
 import torch.nn as nn
 import tushare as ts
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error,r2_score,mean_absolute_error
 from qfluentwidgets import Dialog,IndeterminateProgressRing,IndeterminateProgressBar
 from torch.utils.data import TensorDataset
 from tqdm import tqdm
@@ -110,32 +110,36 @@ class Form_predict(QMainWindow,ui):
 
     # 设置输入控件
     def initialize_lineedit(self):
-
-        #设置输入值只能为整数
+        # 设置输入值只能为整数
         validator_int = QIntValidator()
         # 设置范围为0.0到1.0，小数点后最多4位
         validator_float = QDoubleValidator()
         validator_float.setRange(0.0, 1.0, decimals=4)
 
-        #预报因子数目
+        # 预报因子数目
         self.LineEdit.setValidator(validator_int)
-        #神经元个数
+        self.LineEdit.setPlaceholderText("4")
+        # 神经元个数
         self.LineEdit_7.setValidator(validator_int)
-        #隐藏层层数
+        self.LineEdit_7.setPlaceholderText("4")
+        # 隐藏层大小
         self.LineEdit_8.setValidator(validator_int)
-        #时间步长
+        self.LineEdit_8.setPlaceholderText("256")
+        # 时间步长
         self.LineEdit_9.setValidator(validator_int)
-        #迭代次数
+        self.LineEdit_9.setPlaceholderText("1")
+        # 迭代次数
         self.LineEdit_10.setValidator(validator_int)
-        #批次大小
+        self.LineEdit_10.setPlaceholderText("10")
+        # 批次大小
         self.LineEdit_11.setValidator(validator_int)
-        #训练集比例
+        self.LineEdit_11.setPlaceholderText("32")
+        # 训练集比例
         self.LineEdit_2.setValidator(validator_float)
-        #学习率
+        self.LineEdit_2.setPlaceholderText("0.7")
+        # 学习率
         self.LineEdit_17.setValidator(validator_float)
-
-
-
+        self.LineEdit_17.setPlaceholderText("0.0003")
 
     # 功能控制
     def handle_buttom(self):
@@ -143,9 +147,27 @@ class Form_predict(QMainWindow,ui):
         self.PushButton_2.clicked.connect(self.deal_data)
         self.PushButton.clicked.connect(self.model_train)
         self.PushButton_4.clicked.connect(self.draw_img)
-        self.PushButton_3.clicked.connect(self.test)
+        self.PushButton_3.clicked.connect(self.model_valid)
+        self.PushButton_6.clicked.connect(self.output_data)
 
+    # 输出检验值
+    def model_valid(self):
+        def mape(y_true, y_pred):
+            return np.mean(np.abs((y_pred - y_true) / y_true)) * 100
 
+        # 定义函数计算Nash-Sutcliffe效率系数
+        def nash_sutcliffe(obs, sim):
+            return 1 - np.sum((obs - sim) ** 2) / np.sum((obs - np.mean(obs)) ** 2)
+
+        # 计算均方误差
+        mse = mean_squared_error(self.y_true_test, self.y_pre_test)
+        mae = mean_absolute_error(self.y_true_test, self.y_pre_test)
+        nse = nash_sutcliffe(self.y_true_test, self.y_pre_test)
+        r2 = r2_score(self.y_true_test, self.y_pre_test)
+        self.LineEdit_3.setText(str(mse))
+        self.LineEdit_4.setText(str(mae))
+        self.LineEdit_5.setText(str(nse))
+        self.LineEdit_6.setText(str(r2))
 
     def test(self):
         self.demo = Progress_inf()
@@ -333,10 +355,24 @@ class Form_predict(QMainWindow,ui):
 
     #绘制迭代误差图
 
-    #输出检验值
+    # 输出检验值
     def model_valid(self):
+        def mape(y_true, y_pred):
+            return np.mean(np.abs((y_pred - y_true) / y_true)) * 100
+
+        # 定义函数计算Nash-Sutcliffe效率系数
+        def nash_sutcliffe(obs, sim):
+            return 1 - np.sum((obs - sim) ** 2) / np.sum((obs - np.mean(obs)) ** 2)
+
         # 计算均方误差
         mse = mean_squared_error(self.y_true_test, self.y_pre_test)
+        mae = mean_absolute_error(self.y_true_test, self.y_pre_test)
+        nse = nash_sutcliffe(self.y_true_test, self.y_pre_test)
+        r2 = r2_score(self.y_true_test, self.y_pre_test)
+        self.LineEdit_3.setText(str(mse))
+        self.LineEdit_4.setText(str(mae))
+        self.LineEdit_5.setText(str(nse))
+        self.LineEdit_6.setText(str(r2))
 
     #绘制图像
     def draw_img(self):
@@ -371,6 +407,21 @@ class Form_predict(QMainWindow,ui):
         self.PixmapLabel_4.setScaledContents(True)  # 图片自适应窗口大小
         self.PixmapLabel_4.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.PixmapLabel_4.setAlignment(Qt.AlignCenter)  # 图片居中显示
+
+    # 导出数据
+    def output_data(self):
+        print(type(self.y_pre_train))
+        train_results = pd.DataFrame({"pre": self.y_pre_train.flatten(), "true": self.y_true_train.flatten()})
+        test_results = pd.DataFrame({"pre": self.y_pre_test.flatten(), "true": self.y_true_test.flatten()})
+        # 保存数据
+        path = QFileDialog.getSaveFileName(self, "保存训练集文件", "./", ("结果(*.xlsx)"))
+        if path:
+            train_results.to_excel(path[0])
+        # 保存数据
+        path = QFileDialog.getSaveFileName(self, "保存测试集文件", "./", ("结果(*.xlsx)"))
+        if path:
+            test_results.to_excel(path[0])
+
 
 def main():
     QApplication.setHighDpiScaleFactorRoundingPolicy(
