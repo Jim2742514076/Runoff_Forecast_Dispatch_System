@@ -118,7 +118,7 @@ class Form_predict(QMainWindow,ui):
 
         # 预报因子数目
         self.LineEdit.setValidator(validator_int)
-        self.LineEdit.setPlaceholderText("4")
+        self.LineEdit.setPlaceholderText("5")
         # 神经元个数
         self.LineEdit_7.setValidator(validator_int)
         self.LineEdit_7.setPlaceholderText("4")
@@ -243,11 +243,12 @@ class Form_predict(QMainWindow,ui):
         else:
             self.warning_dialog(name="数据未导入")
 
-    #模型训练
+    #模型训练(lstm)
     def model_train(self):
         self.statusBar().showMessage("模型训练中...")
         #实例化配置类
         config = Config()
+        print(config.timestep,config.feature_size,config.output_size)
         def split_data(data, timestep, feature_size, output_size):
             dataX = []  # 保存X
             dataY = []  # 保存Y
@@ -279,6 +280,7 @@ class Form_predict(QMainWindow,ui):
             if self.LineEdit.text():
                 config.feature_size = int(self.LineEdit.text())
             config.output_size = 1
+            print(config.timestep, config.feature_size, config.output_size)
             x_train, y_train, x_test, y_test = split_data(self.data_deal, config.timestep, config.feature_size, config.output_size)
             self.showDialog(name="训练集、测试集")
             # 4.将数据转为tensor
@@ -337,10 +339,10 @@ class Form_predict(QMainWindow,ui):
                 if test_loss < config.best_loss:
                     config.best_loss = test_loss
                     torch.save(model.state_dict(), config.save_path)
-            print('Finished Training')
+            # print('Finished Training')
             # self.progressinf.close()
             self.statusBar().showMessage(" ")
-            self.BodyLabel.setText(str(model))
+            # self.BodyLabel.setText(str(model))
 
             self.model = model
             scaler = MinMaxScaler()
@@ -353,7 +355,7 @@ class Form_predict(QMainWindow,ui):
         else:
             self.warning_dialog(name="数据未进行预处理")
 
-    #绘制迭代误差图
+
 
     # 输出检验值
     def model_valid(self):
@@ -410,17 +412,20 @@ class Form_predict(QMainWindow,ui):
 
     # 导出数据
     def output_data(self):
-        print(type(self.y_pre_train))
-        train_results = pd.DataFrame({"pre": self.y_pre_train.flatten(), "true": self.y_true_train.flatten()})
-        test_results = pd.DataFrame({"pre": self.y_pre_test.flatten(), "true": self.y_true_test.flatten()})
-        # 保存数据
-        path = QFileDialog.getSaveFileName(self, "保存训练集文件", "./", ("结果(*.xlsx)"))
-        if path:
-            train_results.to_excel(path[0])
-        # 保存数据
-        path = QFileDialog.getSaveFileName(self, "保存测试集文件", "./", ("结果(*.xlsx)"))
-        if path:
-            test_results.to_excel(path[0])
+        # print(type(self.y_pre_train))
+        if self.y_pre_train is not 0:
+            train_results = pd.DataFrame({"pre": self.y_pre_train.flatten(), "true": self.y_true_train.flatten()})
+            test_results = pd.DataFrame({"pre": self.y_pre_test.flatten(), "true": self.y_true_test.flatten()})
+            # 保存数据
+            path = QFileDialog.getSaveFileName(self, "保存训练集文件", "./", ("结果(*.xlsx)"))
+            if path[0]:
+                train_results.to_excel(path[0])
+                # 保存数据
+                path = QFileDialog.getSaveFileName(self, "保存测试集文件", "./", ("结果(*.xlsx)"))
+                if path[0]:
+                    test_results.to_excel(path[0])
+        else:
+            self.warning_dialog("训练集、测试集数据未生成")
 
 
 def main():
